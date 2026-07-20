@@ -1,0 +1,11 @@
+import StudentProfile from "./components/StudentProfile";
+
+function App() {
+  return (
+    <div>
+      <StudentProfile />
+    </div>
+  );
+}
+
+export default App;
