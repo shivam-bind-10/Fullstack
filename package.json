@@ -1,0 +1,24 @@
+{
+  "name": "fullstack-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "counter-app",
+    "exp-1-1-2-student-card",
+    "exp-1-1-3-dashboard",
+    "my-first-react-app",
+    "student-data-table",
+    "student-form-app"
+  ],
+  "scripts": {
+    "dev:counter": "npm run dev --workspace=counter-app",
+    "dev:card": "npm run dev --workspace=exp-1-1-2-student-card",
+    "dev:dashboard": "npm run dev --workspace=exp-1-1-3-dashboard",
+    "dev:first-app": "npm run dev --workspace=my-first-react-app",
+    "dev:table": "npm run dev --workspace=student-data-table",
+    "dev:form": "npm run dev --workspace=student-form-app"
+  },
+  "dependencies": {
+    "react-router-dom": "^7.18.2"
+  }
+}

@@ -2,7 +2,7 @@ import StudentCard from "./components/StudentCard";
 
 function App() {
   const students = [
-    { id: 1, name: "Shivam Bind", age: 20, course: "CSE", grade: "A" },
+    { id: 1, name: "Sarvesh singh", age: 20, course: "CSE", grade: "A" },
     { id: 2, name: "Rahul Sharma", age: 21, course: "ECE", grade: "B+" },
     { id: 3, name: "Priya Gupta", age: 19, course: "IT", grade: "A+" },
     { id: 4, name: "Aman Verma", age: 22, course: "ME", grade: "B" },

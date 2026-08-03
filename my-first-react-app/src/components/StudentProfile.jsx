@@ -14,7 +14,7 @@ function StudentProfile() {
       <h2>Student Profile</h2>
 
       <p>
-        <strong>Name:</strong> Shivam Bind
+        <strong>Name:</strong> Sarvesh singh
       </p>
 
       <p>
