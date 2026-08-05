@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
 
         const data = await response.json();
 
-        // Group member and student names
         const groupNames = [
           "Shivam Bind",
           "Manu Negi",
@@ -39,13 +37,12 @@ function App() {
           "Yash",
         ];
 
-        // Create 15 students using API data
         const updatedStudents = groupNames.map((name, index) => {
           const apiStudent = data[index % data.length];
 
           return {
             id: index + 1,
-            name: name,
+            name,
             email: apiStudent.email,
             address: {
               city: apiStudent.address.city,
@@ -64,74 +61,149 @@ function App() {
     fetchStudents();
   }, []);
 
-  // Live search by student name
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Loading message
   if (loading) {
-    return <h2>Loading...</h2>;
+    return (
+      <div style={styles.center}>
+        <h1>⏳ Loading Students...</h1>
+      </div>
+    );
   }
 
-  // Error message
   if (error) {
-    return <h2>Error: {error}</h2>;
+    return (
+      <div style={styles.center}>
+        <h2 style={{ color: "red" }}>❌ {error}</h2>
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Student Data Table</h1>
+    <div style={styles.page}>
+      <div style={styles.card}>
+        <h1 style={styles.heading}>🎓 Student Data Dashboard</h1>
 
-      <input
-        type="text"
-        placeholder="Search by name"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          padding: "8px",
-          marginBottom: "20px",
-          width: "250px",
-        }}
-      />
+        <p style={styles.subHeading}>
+          Total Students : <b>{filteredStudents.length}</b>
+        </p>
 
-      <table
-        border="1"
-        cellPadding="10"
-        style={{
-          borderCollapse: "collapse",
-          width: "100%",
-        }}
-      >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>City</th>
-          </tr>
-        </thead>
+        <input
+          type="text"
+          placeholder="🔍 Search student..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={styles.search}
+        />
 
-        <tbody>
-          {filteredStudents.length > 0 ? (
-            filteredStudents.map((student) => (
-              <tr key={student.id}>
-                <td>{student.id}</td>
-                <td>{student.name}</td>
-                <td>{student.email}</td>
-                <td>{student.address.city}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No student found</td>
+        <table style={styles.table}>
+          <thead>
+            <tr style={styles.headerRow}>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>City</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {filteredStudents.length > 0 ? (
+              filteredStudents.map((student) => (
+                <tr key={student.id} style={styles.row}>
+                  <td>{student.id}</td>
+                  <td>{student.name}</td>
+                  <td>{student.email}</td>
+                  <td>{student.address.city}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan="4"
+                  style={{
+                    textAlign: "center",
+                    padding: "20px",
+                    color: "red",
+                  }}
+                >
+                  😔 No student found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
 
-export default App;
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg,#667eea,#764ba2)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "40px",
+    fontFamily: "Arial, sans-serif",
+  },
 
+  card: {
+    width: "95%",
+    maxWidth: "1100px",
+    background: "#fff",
+    borderRadius: "15px",
+    padding: "30px",
+    boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+  },
+
+  heading: {
+    textAlign: "center",
+    color: "#4b0082",
+    marginBottom: "5px",
+  },
+
+  subHeading: {
+    textAlign: "center",
+    color: "#666",
+    marginBottom: "20px",
+  },
+
+  search: {
+    width: "100%",
+    padding: "12px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    marginBottom: "20px",
+    outline: "none",
+  },
+
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    overflow: "hidden",
+  },
+
+  headerRow: {
+    background: "#4b0082",
+    color: "white",
+  },
+
+  row: {
+    textAlign: "center",
+    borderBottom: "1px solid #ddd",
+  },
+
+  center: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Arial",
+  },
+};
+
+export default App; 
