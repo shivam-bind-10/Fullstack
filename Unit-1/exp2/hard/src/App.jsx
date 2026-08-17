@@ -63,7 +63,7 @@ function App() {
 
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(search.toLowerCase())
-  );
+  ); 
 
   if (loading) {
     return (
@@ -116,7 +116,7 @@ function App() {
                   <td>{student.name}</td>
                   <td>{student.email}</td>
                   <td>{student.address.city}</td>
-                </tr>
+                </tr> 
               ))
             ) : (
               <tr>
